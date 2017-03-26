@@ -19,6 +19,17 @@ def twitter_search(a):
         bool = True
     return bool
 
+def tangible_search(url,a):
+    try:
+        url=url.strip()
+        if(url.find(".")):
+            data = urllib.request.urlopen(url+a)
+        else:
+            data = urllib.request.urlopen("http://"+url+".com/" + a)
+        bool = False
+    except urllib.error.HTTPError:
+        bool = True
+    return bool
 
 def ListOfElements(a):
     web = urllib.request.urlopen("http://naming.verisign-grs.com/ns-api/1.0/suggest?key="+a)
@@ -43,4 +54,3 @@ def ListOfElements(a):
             x.append("Twitter:Unavailable")
     return listofelemnts
 
-print(ListOfElements("Ryan"))
