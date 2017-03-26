@@ -40,6 +40,15 @@ def tangible_search(url,a):
         bool = True
     return bool
 
+def ListConverter(listofelements):
+    LL=[]
+    for line in listofelements:
+        tempLL = []
+        for x in line:
+            element=str(x.split(":", 1)[-1])
+            tempLL.append(element)
+        LL.append(tempLL)
+    return LL
 def ListOfElements(a):
     web = urllib.request.urlopen("http://naming.verisign-grs.com/ns-api/1.0/suggest?key="+a)
     page = web.read()
@@ -54,17 +63,24 @@ def ListOfElements(a):
     for x in listofelemnts:
         name=((x[0]).split(":", 1)[-1]).split(".", 1)[0]
         if facebook_search(name):
-            x.append("Facebook:Available")
+            x.append("Facebook:available")
         else:
-            x.append("Facebook:Unavailable")
+            x.append("Facebook:unavailable")
         if twitter_search(name):
-            x.append("Twitter:Available")
+            x.append("Twitter:available")
         else:
-            x.append("Twitter:Unavailable")
+            x.append("Twitter:unavailable")
         if instagram_search(name):
-            x.append("Instagram:Available")
+            x.append("Instagram:available")
         else:
-            x.append("Instagram:Unavailable")
+            x.append("Instagram:unavailable")
+    listofelemntsPrinted=ListConverter(listofelemnts)
+    return listofelemntsPrinted
 
-    return listofelemnts
+def NameListCreator(listofelemtns):
+    NameList=[]
+    for line in listofelemtns:
+        NameList.append(line[0])
+    return NameList
 
+print(ListOfElements("Ryan"))
