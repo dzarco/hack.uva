@@ -19,6 +19,15 @@ def twitter_search(a):
         bool = True
     return bool
 
+def instagram_search(a):
+    try:
+        data = urllib.request.urlopen("http://instagram.com/"+a)
+        bool = False
+    except urllib.error.HTTPError:
+        bool = True
+    return bool
+
+
 def tangible_search(url,a):
     try:
         url=url.strip()
@@ -52,5 +61,10 @@ def ListOfElements(a):
             x.append("Twitter:Available")
         else:
             x.append("Twitter:Unavailable")
+        if instagram_search(name):
+            x.append("Instagram:Available")
+        else:
+            x.append("Instagram:Unavailable")
+
     return listofelemnts
 
